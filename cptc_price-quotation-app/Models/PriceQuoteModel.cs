@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace cptc_price_quotation_app.Models
 {
@@ -10,6 +12,7 @@ namespace cptc_price_quotation_app.Models
         [DataType(DataType.Currency)]
         [Display(Name = "Subtotal:")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
+        [DefaultValue(0)]
         public double Subtotal { get; set; }
 
 
@@ -17,6 +20,7 @@ namespace cptc_price_quotation_app.Models
         [Required(ErrorMessage = "Discount percent is required")]
         [Display(Name = "Discount Percent:")]
         [DisplayFormat(DataFormatString = "0:F2")]
+        [DefaultValue(0)]
 
         [Range(0, 100, ErrorMessage = "Discount must be between 0.00% to 100.00%")]
 
@@ -25,11 +29,13 @@ namespace cptc_price_quotation_app.Models
         
         [DataType(DataType.Currency)]
         [Display(Name = "Discount Amount:")]
+        [DefaultValue(0)]
 
         public double DiscountAmount { get; set; }
 
         [DataType(DataType.Currency)]
         [Display(Name = "Total:")]
+        [DefaultValue(0)]
         public double Total { get; set; }
         public PriceQuoteModel()
         {
@@ -38,5 +44,9 @@ namespace cptc_price_quotation_app.Models
             DiscountAmount = 0;
             Total = 0;
         }
+
+
+
+
     }
 }

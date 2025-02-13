@@ -6,7 +6,7 @@
 }
 
 <style>
-    .field-validation-error{
+    .field-validation-error, .field-validation-valid{
         grid-column: 1 / span 100;
     }
 </style>
@@ -15,7 +15,7 @@
 <h4>Price Quotation</h4>
 <div class="row mt-3 mx-auto" style="max-width: 500px">
     <div class="col-12">
-        <form asp-action="Index" onsubmit="event.preventDefault()">
+        <form asp-action="CalculateQuote" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <style>
                 .form-group {
@@ -31,11 +31,11 @@
                
          
 
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                     </div>
-                    <input id="subtotal-input" asp-for="Subtotal" type="number" class="form-control">
+                    <input  id="subtotal-input" asp-for="Subtotal" type="number" class="form-control">
                 </div>
                 <span asp-validation-for="Subtotal" class="text-danger"></span>
             </div>
@@ -56,11 +56,11 @@
                 <label asp-for="DiscountAmount" class="control-label"></label>
            
 
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                     </div>
-                    <input readonly id="subtotal-input" placeholder="@Model.DiscountAmount.ToString("C")" asp-for="Subtotal" type="number" class="form-control">
+                    <input disabled placeholder="@Model.DiscountAmount.ToString("C")" asp-for="DiscountAmount" type="number" class="form-control">
                 </div>
 
             </div>
@@ -70,11 +70,11 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                     </div>
-                    <input readonly id="subtotal-input" placeholder="@Model.Total.ToString("C")" asp-for="Subtotal" type="number" class="form-control">
+                    <input disabled placeholder="@Model.Total.ToString("C")" asp-for="Total" type="number" class="form-control">
                 </div>
             </div>
             <div class="d-flex  align-items-center justify-content-center">
-                <input type="submit" value="Calculate" class="px-4 me-3 btn btn-secondary btn-sm" />
+                <input  type="submit" value="Calculate" class="px-4 me-3 btn btn-secondary btn-sm" />
                 <a href="#" onclick="resetForm(event)">Clear</a>
             </div>
         </form>
@@ -90,17 +90,17 @@
 <script>
     function resetForm(e){
         console.log("Reset form")
+
+        // Change the form to 0
+
+
         e.target.closest("form").reset();
 
-        // reset model values
-
-        // focus subtotal
         document.querySelector('#subtotal-input').focus();
 
 
     }
 </script>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
