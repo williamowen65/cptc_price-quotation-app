@@ -1,0 +1,78 @@
+﻿@model cptc_price_quotation_app.Models.PriceQuoteModel
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<style>
+    .field-validation-error{
+        grid-column: 1 / span 2;
+    }
+</style>
+
+
+<h4>Price Quotation</h4>
+<div class="row mt-3">
+    <div class="col-12">
+        <form asp-action="Index" onsubmit="event.preventDefault()">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <style>
+                .form-group {
+                    display: grid;
+                    grid-template-columns: 150px 1fr;
+                }
+                .form-group{
+                    margin-bottom:10px;
+                }
+            </style>
+            <div class="form-group ">
+                <label asp-for="Subtotal" class="control-label"></label>
+                <input id="subtotal-input" asp-for="Subtotal" type="number" class="form-control" />
+                <span asp-validation-for="Subtotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscountPercent" class="control-label"></label>
+                <input asp-for="DiscountPercent" type="number" class="form-control" />
+                <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscountAmount" class="control-label"></label>
+                <span>@Model.DiscountAmount.ToString("C")</span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Total" class="control-label"></label>
+                <span>@Model.Total.ToString("C")</span>
+            </div>
+            <div class="form-group  align-items-center">
+                <input type="submit" value="Calculate" class="me-3 btn btn-secondary btn-sm" />
+                <a href="#" onclick="resetForm(event)">Clear</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script>
+    function resetForm(e){
+        console.log("Reset form")
+        e.target.closest("form").reset();
+
+        // reset model values
+
+        // focus subtotal
+        document.querySelector('#subtotal-input').focus();
+
+
+    }
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
