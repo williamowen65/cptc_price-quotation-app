@@ -7,13 +7,13 @@
 
 <style>
     .field-validation-error{
-        grid-column: 1 / span 2;
+        grid-column: 1 / span 100;
     }
 </style>
 
 
 <h4>Price Quotation</h4>
-<div class="row mt-3">
+<div class="row mt-3 mx-auto" style="max-width: 500px">
     <div class="col-12">
         <form asp-action="Index" onsubmit="event.preventDefault()">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -28,30 +28,60 @@
             </style>
             <div class="form-group ">
                 <label asp-for="Subtotal" class="control-label"></label>
-                <input id="subtotal-input" asp-for="Subtotal" type="number" class="form-control" />
+               
+         
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input id="subtotal-input" asp-for="Subtotal" type="number" class="form-control">
+                </div>
                 <span asp-validation-for="Subtotal" class="text-danger"></span>
             </div>
+
+          
             <div class="form-group">
                 <label asp-for="DiscountPercent" class="control-label"></label>
-                <input asp-for="DiscountPercent" type="number" class="form-control" />
+               
+                <div class="input-group">
+                    <input asp-for="DiscountPercent" type="number" class="form-control" style="text-align:right" />
+                    <div class="input-group-append">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
                 <span asp-validation-for="DiscountPercent" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DiscountAmount" class="control-label"></label>
-                <span>@Model.DiscountAmount.ToString("C")</span>
+           
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input readonly id="subtotal-input" placeholder="@Model.DiscountAmount.ToString("C")" asp-for="Subtotal" type="number" class="form-control">
+                </div>
 
             </div>
             <div class="form-group">
                 <label asp-for="Total" class="control-label"></label>
-                <span>@Model.Total.ToString("C")</span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input readonly id="subtotal-input" placeholder="@Model.Total.ToString("C")" asp-for="Subtotal" type="number" class="form-control">
+                </div>
             </div>
-            <div class="form-group  align-items-center">
-                <input type="submit" value="Calculate" class="me-3 btn btn-secondary btn-sm" />
+            <div class="d-flex  align-items-center justify-content-center">
+                <input type="submit" value="Calculate" class="px-4 me-3 btn btn-secondary btn-sm" />
                 <a href="#" onclick="resetForm(event)">Clear</a>
             </div>
         </form>
     </div>
 </div>
+
+
 
 <div>
     <a asp-action="Index">Back to List</a>
