@@ -13,7 +13,7 @@ namespace cptc_price_quotation_app.Models
         [Display(Name = "Subtotal:")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
         [DefaultValue(0)]
-        public double Subtotal { get; set; }
+        public double Subtotal { get; set; } = 0;
 
 
 
@@ -24,19 +24,19 @@ namespace cptc_price_quotation_app.Models
 
         [Range(0, 100, ErrorMessage = "Discount must be between 0.00% to 100.00%")]
 
-        public double DiscountPercent { get; set; }
-        
-        
+        public double DiscountPercent { get; set; } = 0;
+
+
         [DataType(DataType.Currency)]
         [Display(Name = "Discount Amount:")]
         [DefaultValue(0)]
 
-        public double DiscountAmount { get; set; }
+        public double DiscountAmount { get; set; } = 0;
 
         [DataType(DataType.Currency)]
         [Display(Name = "Total:")]
         [DefaultValue(0)]
-        public double Total { get; set; }
+        public double Total { get; set; } = 0;
         public PriceQuoteModel()
         {
             Subtotal = 0;

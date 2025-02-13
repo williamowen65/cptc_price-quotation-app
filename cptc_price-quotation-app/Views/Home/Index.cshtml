@@ -35,7 +35,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                     </div>
-                    <input  id="subtotal-input" asp-for="Subtotal" type="number" class="form-control">
+                    <input value="@Model.Subtotal"  id="subtotal-input" asp-for="Subtotal" type="number" class="form-control">
                 </div>
                 <span asp-validation-for="Subtotal" class="text-danger"></span>
             </div>
@@ -45,7 +45,7 @@
                 <label asp-for="DiscountPercent" class="control-label"></label>
                
                 <div class="input-group">
-                    <input asp-for="DiscountPercent" type="number" class="form-control" style="text-align:right" />
+                    <input id="discountPercent" value="@Model.DiscountPercent" asp-for="DiscountPercent" type="number" class="form-control" style="text-align:right" />
                     <div class="input-group-append">
                         <span class="input-group-text">%</span>
                     </div>
@@ -60,7 +60,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                     </div>
-                    <input disabled placeholder="@Model.DiscountAmount.ToString("C")" asp-for="DiscountAmount" type="number" class="form-control">
+                    <input id="discountAmount" value="@Model.DiscountAmount" disabled asp-for="DiscountAmount" type="number" class="form-control">
                 </div>
 
             </div>
@@ -70,7 +70,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                     </div>
-                    <input disabled placeholder="@Model.Total.ToString("C")" asp-for="Total" type="number" class="form-control">
+                    <input id="total" disabled value="@Model.Total" asp-for="Total" type="number" class="form-control">
                 </div>
             </div>
             <div class="d-flex  align-items-center justify-content-center">
@@ -92,12 +92,21 @@
         console.log("Reset form")
 
         // Change the form to 0
+        // Make sure the data model is in sync? Should I submit the form with inital values?
 
+        // For right now I am just using frontend JS to do this
+        // NOTE: This is not the ideal pattern. I want this logic
+        // to be via data annotations. [DefaultValue(0)] but I didn't see how to use that value.
 
         e.target.closest("form").reset();
 
-        document.querySelector('#subtotal-input').focus();
+        // Reset form fields to initial values
+        document.querySelector('#subtotal-input').value =  0;
+        document.querySelector('#discountPercent').value = 0;
+        document.querySelector('#discountAmount').value = 0
+        document.querySelector('#total').value = 0;
 
+        document.querySelector('#subtotal-input').focus();
 
     }
 </script>
